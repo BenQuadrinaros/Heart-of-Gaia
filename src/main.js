@@ -1,42 +1,34 @@
 /*
-Mark Medved, Ben Rowland, and Thane Wisherop
-Mega Golf
-Completed 6/7/2020
+Ben Rowland
+Heart of Gaia
+DATE
 
-A mini-golf inspired game, where you terraform the course itself
-to achieve impossible shots on nature-inspired courses. Play
-through 9 increasingly difficult holes, or just experiment in the
-sandbox.
+This game is a rouge-like RPG with procedurally generated
+characters and changing maps. It serves as a digital 
+adaptation to a tabletop roleplaying game, Affinity 
+and Aptitude, created by Ben Rowland.
+
+Name lists courtesy of Huggies.
 */
 
 let config = {
     type: Phaser.CANVAS,
-    width: 880,
-    height: 640,
-    physics:{
-        default:'arcade',
-        arcade:{
-            debug: false,
-            gravity:{
-                x:0,
-                y:0
-            }
-        }
-    },
+    width: 1200,
+    height: 675,
 
-    scene: [Menu, Level_Select, Sandbox, Pre1, Level_1, Pre2, Level_2, Pre3, Level_3, Pre4, Level_4, 
-        Pre5, Level_5, Pre6, Level_6, Pre7, Level_7, Pre8, Level_8, Pre9, Level_9, End_Screen]
+    scene: [Menu, CharacterCreate]
 
 };
 
 let game = new Phaser.Game(config);
 
 game.settings = {
-    
+    characterSlots: 3,
+    money: 10
 };
-let levelsAvailable = [1];
+
+let player;
 
 //reserve some keyboard variables
 let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyR, keyP, keyQ;
 let keyZERO, keyONE, keyTWO, keyTHREE, keyFOUR, keyFIVE, keySIX, keySEVEN, keyEIGHT, keyNINE;
-let mouseDown = false;
