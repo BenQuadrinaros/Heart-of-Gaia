@@ -16,7 +16,7 @@ let config = {
     width: 1200,
     height: 675,
 
-    scene: [Menu, CharacterCreate]
+    scene: [Menu, CharacterCreate, PathCreate]
 
 };
 
@@ -27,8 +27,8 @@ game.settings = {
     money: 10
 };
 
-let player;
+game.player;
 
 //reserve some keyboard variables
-let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyR, keyP, keyQ;
+let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyR, keyP, keyQ, keyESC;
 let keyZERO, keyONE, keyTWO, keyTHREE, keyFOUR, keyFIVE, keySIX, keySEVEN, keyEIGHT, keyNINE;

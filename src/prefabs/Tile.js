@@ -1,6 +1,6 @@
 class Tile extends Phaser.GameObjects.Sprite {
 
-    constructor(scene, x, y, texture, frame, type, character, misc) {
+    constructor(scene, x, y, texture, frame, type, character, misc = null) {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
 
@@ -9,18 +9,32 @@ class Tile extends Phaser.GameObjects.Sprite {
         this.misc = misc;
     }
 
-    checkSpot(newChar) {
+    getType() {
+        return this.type;
+    }
+    getEmpty() {
+        if(this.character == null) { return true; } else { return false; }
+    }
+
+    moveToSpot(newChar) {
         if(this.character != null) {
             //fight time
         }
         if(this.character != null && this.character.currentHP <= 0) {
             this.character = null;
         }
-        if(this.type = "danger") {
+        if(this.type = "trap") {
             //survival check
         }
-        if(this.type = "special") {
-            //perform action
+        if(this.type = "buff") {
+            //increase deck
+        }
+        if(this.type = "key") {
+            //set key and disable
+        }
+        if(this.type = "lock") {
+            //if key, go
+            //if not key, override
         }
         if(newChar.currentHP > 0) {
             return true;
