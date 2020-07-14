@@ -68,6 +68,8 @@ class Character extends Phaser.GameObjects.Sprite {
         this.maxHealth = this.class[4] + this.class[5] + this.class[9];
         if(this.trait[1] == "health") { this.maxHealth += this.trait[2]; }
         this.currentHP = this.maxHealth;
+        this.movespeed = this.class[17];
+        if(this.trait[1] == "move") { this.movespeed += this.trait[2]; }
 
         //establish decks
         this.fameDeck = new Deck(this.class[1]);
@@ -87,6 +89,31 @@ class Character extends Phaser.GameObjects.Sprite {
         this.airDeck = new Deck(this.class[15]);
         this.darkDeck = new Deck(this.class[16]);
 
+    }
+
+    heal(amount) {
+        this.currentHP += amount;
+        if(this.currentHP > this.maxHealth) { this.currentHP = this.maxHealth; }
+    }
+
+    rest() {
+        this.currentHP = this.maxHealth;
+        this.fameDeck.refill();
+        this.fortuneDeck.refill();
+        this.weaponDeck.refill();
+        this.martialDeck.refill();
+        this.resistDeck.refill();
+        this.evasiveDeck.refill();
+        this.acuityDeck.refill();
+        this.prowessDeck.refill();
+        this.determinDeck.refill();
+        this.haggleDeck.refill();
+        this.earthDeck.refill();
+        this.fireDeck.refill();
+        this.waterDeck.refill();
+        this.lightDeck.refill();
+        this.airDeck.refill();
+        this.darkDeck.refill();
     }
 
 }

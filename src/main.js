@@ -24,10 +24,12 @@ let game = new Phaser.Game(config);
 
 game.settings = {
     characterSlots: 3,
-    money: 10
+    money: 10,
+    pathReroll: true
 };
 
 game.player;
+game.path;
 
 //reserve some keyboard variables
 let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyR, keyP, keyQ, keyESC;

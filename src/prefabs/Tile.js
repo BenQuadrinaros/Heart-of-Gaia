@@ -18,16 +18,13 @@ class Tile extends Phaser.GameObjects.Sprite {
 
     moveToSpot(newChar) {
         if(this.character != null) {
-            //fight time
+            this.character.interact(newChar)
         }
         if(this.character != null && this.character.currentHP <= 0) {
             this.character = null;
         }
         if(this.type = "trap") {
             //survival check
-        }
-        if(this.type = "buff") {
-            //increase deck
         }
         if(this.type = "key") {
             //set key and disable

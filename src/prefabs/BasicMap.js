@@ -1,8 +1,6 @@
-class Map extends Phaser.GameObjects.Sprite {
+class BasicMap extends Phaser.GameObjects.Sprite {
 
-    constructor(scene, x, y, texture, frame, player, grid, properties) {
-        super(scene, x, y, texture, frame);
-        scene.add.existing(this);
+    constructor(scene, x, y, grid, properties) {
 
         if (grid[2] != null) { properties = grid[2]; }
 
@@ -19,8 +17,14 @@ class Map extends Phaser.GameObjects.Sprite {
         this.load.image("preLock", "./assets/" + properties[7][0] + ".png");
         this.load.image("postLock", "./assets/" + properties[7][1] + ".png");
         this.load.image("enemy", "./assets/" + properties[8][0] + ".png");
+        this.load.image("background", "./assets/" + properties[9] + ".png");
+        this.load.image("interact", "./assets/" + properties[10] + ".png");
+        
+        super(scene, x, y, "background", frame);
+        scene.add.existing(this);
 
         this.mapTiles = [];
+        this.npcs = [];
 
         for (let row = 0; row < this.grid.length; ++row) {
             let temp = [];
@@ -43,7 +47,19 @@ class Map extends Phaser.GameObjects.Sprite {
                         new Tile(scene, row * 32 + 4, col * 32 + 4, "trap", "trap", null, properties[5]);
                         break;
                     case 5:
-                        new Tile(scene, row * 32 + 4, col * 32 + 4, "buff", "buff", null);
+                        let random = Phaser.Math.Between(0, 1);
+                        let thing;
+                        if(random > .6) {
+                            let allyProperties = allies[Math.floor(Phaser.Math.Between(0, allies.length - 1))];
+                            thing = new Ally(scene, row * 32 + 4, col * 32 + 4, texture, 0, allyProperties);
+                            random = -1;
+                        } else if(random > .35) {
+                            thing = new Chest(scene, row * 32 + 4, col * 32 + 4, texture, 0);
+                        } else {
+                            let merchantProperties = merchants[Math.floor(Phaser.Math.Between(0, merchants.length - 1))];
+                            thing = new Merchant(scene, row * 32 + 4, col * 32 + 4, texture, 0, merchantProperties);
+                        }
+                        new Tile(scene, row * 32 + 4, col * 32 + 4, "open", "open", thing);
                         break;
                     case 6:
                         new Tile(scene, row * 32 + 4, col * 32 + 4, "preKey", "key", null);
@@ -52,9 +68,11 @@ class Map extends Phaser.GameObjects.Sprite {
                         new Tile(scene, row * 32 + 4, col * 32 + 4, "preLock", "lock", null, properties[7]);
                         break;
                     case 8:
-                        new Tile(scene, row * 32 + 4, col * 32 + 4, "open", "open", player)
+                        new Tile(scene, row * 32 + 4, col * 32 + 4, "open", "open", game.player)
                     case 9:
-                        new Tile(scene, row * 32 + 4, col * 32 + 4, "open", "open", null);
+                        let grunt = new Grunt(scene, row * 32 + 4, col * 32 + 4, "enemy", 0, properties[8]);
+                        new Tile(scene, row * 32 + 4, col * 32 + 4, "open", "open", grunt);
+                        this.npcs.push(grunt);
                         break;
                     default:
                 }

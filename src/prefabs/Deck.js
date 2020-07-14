@@ -51,4 +51,14 @@ class Deck  {
         this.cards.push(this.affinity);
         this.shuffle();
     }
+
+    dump() {
+        if(this.affinity == 0) { return; }
+        for(let i = 0; i < this.cards.length; ++i) {
+            if(this.cards[i] == this.affinity) {
+                this.cards.splice(i, 1);
+            }
+        }
+        --this.affinity;
+    }
 }
