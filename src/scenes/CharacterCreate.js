@@ -7,6 +7,10 @@ class CharacterCreate extends Phaser.Scene {
         //load images for all the characters
         this.load.image("image", "./assets/spaceship.png");
         this.load.image("lock", "./assets/reticleF.png");
+        
+        //load audio files
+        this.load.audio("menuSelect", "./assets/menuSelect.wav");
+        this.load.audio("tick", "./assets/tick.wav");
 
     }
 
@@ -83,7 +87,7 @@ class CharacterCreate extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyESC) && !this.hasChosen) {
             this.hasChosen = true;
-            //this.sound.play("menuSelect");
+            this.sound.play("menuSelect");
             this.time.addEvent({
                 delay: 1300,
                 callback: () => {
@@ -98,6 +102,7 @@ class CharacterCreate extends Phaser.Scene {
             if (this.playerSelect == 1) {
                 game.player = this.char1;
                 this.hasChosen = true;
+                this.sound.play("menuSelect");
                 this.time.addEvent({
                     delay: 1300,
                     callback: () => {
@@ -107,6 +112,7 @@ class CharacterCreate extends Phaser.Scene {
                     callbackScope: this
                 });
             } else {
+                this.sound.play("tick");
                 this.playerSelect = 1;
                 this.confirmText.x = this.x1;
                 this.confirmText.y = this.y3 + 84;
@@ -118,6 +124,7 @@ class CharacterCreate extends Phaser.Scene {
             if (this.playerSelect == 2) {
                 game.player = this.char2;
                 this.hasChosen = true;
+                this.sound.play("menuSelect");
                 this.time.addEvent({
                     delay: 1300,
                     callback: () => {
@@ -127,6 +134,7 @@ class CharacterCreate extends Phaser.Scene {
                     callbackScope: this
                 });
             } else {
+                this.sound.play("tick");
                 this.playerSelect = 2;
                 this.confirmText.x = this.x2;
                 this.confirmText.y = this.y3 + 84;
@@ -138,6 +146,7 @@ class CharacterCreate extends Phaser.Scene {
             if (this.playerSelect == 3) {
                 game.player = this.char3;
                 this.hasChosen = true;
+                this.sound.play("menuSelect");
                 this.time.addEvent({
                     delay: 1300,
                     callback: () => {
@@ -147,6 +156,7 @@ class CharacterCreate extends Phaser.Scene {
                     callbackScope: this
                 });
             } else {
+                this.sound.play("tick");
                 this.playerSelect = 3;
                 this.confirmText.x = this.x3;
                 this.confirmText.y = this.y3 + 84;

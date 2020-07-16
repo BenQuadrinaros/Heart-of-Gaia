@@ -19,9 +19,11 @@ class BasicMap extends Phaser.GameObjects.Sprite {
         this.load.image("enemy", "./assets/" + properties[8][0] + ".png");
         this.load.image("background", "./assets/" + properties[9] + ".png");
         this.load.image("interact", "./assets/" + properties[10] + ".png");
-        
+
         super(scene, x, y, "background", frame);
         scene.add.existing(this);
+
+        this.add.tileSprite(0, 0, 36 * this.grid[0].length, 36 * this.grid.length, "background").setOrigin(0, 0);
 
         this.mapTiles = [];
         this.npcs = [];
@@ -49,11 +51,11 @@ class BasicMap extends Phaser.GameObjects.Sprite {
                     case 5:
                         let random = Phaser.Math.Between(0, 1);
                         let thing;
-                        if(random > .6) {
+                        if (random > .6) {
                             let allyProperties = allies[Math.floor(Phaser.Math.Between(0, allies.length - 1))];
                             thing = new Ally(scene, row * 32 + 4, col * 32 + 4, texture, 0, allyProperties);
                             random = -1;
-                        } else if(random > .35) {
+                        } else if (random > .35) {
                             thing = new Chest(scene, row * 32 + 4, col * 32 + 4, texture, 0);
                         } else {
                             let merchantProperties = merchants[Math.floor(Phaser.Math.Between(0, merchants.length - 1))];

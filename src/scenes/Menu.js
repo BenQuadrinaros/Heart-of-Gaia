@@ -4,7 +4,8 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-
+        //load audio files
+        this.load.audio("menuSelect", "./assets/menuSelect.wav");
     }
 
     create() {
@@ -39,10 +40,10 @@ class Menu extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyUP) && !this.hasChosen) {
             this.hasChosen = true;
-            //this.sound.play("menuSelect");
+            this.sound.play("menuSelect");
             this.time.addEvent({
                 delay: 1300,
-                callback: () => { 
+                callback: () => {
                     this.scene.start("characterCreate");
                 },
                 loop: false,

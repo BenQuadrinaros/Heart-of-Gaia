@@ -8,7 +8,7 @@ characters and changing maps. It serves as a digital
 adaptation to a tabletop roleplaying game, Affinity 
 and Aptitude, created by Ben Rowland.
 
-Name lists courtesy of Huggies.
+List of names courtesy of Huggies.
 */
 
 let config = {
@@ -16,7 +16,7 @@ let config = {
     width: 1200,
     height: 675,
 
-    scene: [Menu, CharacterCreate, PathCreate]
+    scene: [Menu, CharacterCreate, PathCreate, Level]
 
 };
 
@@ -25,7 +25,7 @@ let game = new Phaser.Game(config);
 game.settings = {
     characterSlots: 3,
     money: 10,
-    pathReroll: true
+    pathReroll: 1
 };
 
 game.player;
