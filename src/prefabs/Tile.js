@@ -9,34 +9,35 @@ class Tile extends Phaser.GameObjects.Sprite {
         this.misc = misc;
     }
 
+    update() {
+        if (this.character != null && this.character.currentHP <= 0) {
+            this.character = null;
+        }
+    }
+
     getType() {
         return this.type;
     }
     getEmpty() {
-        if(this.character == null) { return true; } else { return false; }
+        if (this.character == null) { return true; } else { return false; }
     }
 
-    moveToSpot(newChar) {
-        if(this.character != null) {
-            this.character.interact(newChar)
+    pokeSpot(char) {
+        if (this.character != null) {
+            if (newChar == game.player) {
+                this.character.interact(newChar)
+            } else {
+                this.newChar.interact(character)
+            }
         }
-        if(this.character != null && this.character.currentHP <= 0) {
-            this.character = null;
-        }
-        if(this.type = "trap") {
+        if (this.type = "trap") {
             //survival check
         }
-        if(this.type = "key") {
+        if (this.type = "key") {
             //set key and disable
         }
-        if(this.type = "lock") {
-            //if key, go
+        if (this.type = "lock") {
             //if not key, override
-        }
-        if(newChar.currentHP > 0) {
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -48,7 +49,25 @@ class Tile extends Phaser.GameObjects.Sprite {
         this.character = null;
     }
 
+    getCharacter() {
+        return this.character;
+    }
+
     changeType(newType) {
         this.type = newType;
+    }
+
+    unlock() {
+        if (this.type == "lock") {
+            this.setTexture("postLock");
+            this.type = "unlock";
+        }
+    }
+
+    getKey() {
+        if(this.type == "key") {
+            this.setTexture("postKey");
+            this.type = "unkey";
+        }
     }
 }

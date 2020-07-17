@@ -45,7 +45,8 @@ class PathCreate extends Phaser.Scene {
 
         //remove constructing image
 
-        //tutorial level
+        //text for displaying path
+        this.room0 = this.add.text(this.x2, 25, "", this.menuConfig).setOrigin(.5);
         this.room1 = this.add.text(this.x1, this.y1, "", this.menuConfig).setOrigin(.5);
         this.room2 = this.add.text(this.x2, this.y1, "", this.menuConfig).setOrigin(.5);
         this.room3 = this.add.text(this.x3, this.y1, "", this.menuConfig).setOrigin(.5);
@@ -64,11 +65,12 @@ class PathCreate extends Phaser.Scene {
         this.path = [];
 
         //push the training grounds
-        this.path.push(null);
+        let grid = tutorialGrids[Math.floor(Phaser.Math.Between(0, tutorialGrids.length - 1))];
+        let type = tutorialSpecs;
+        this.path.push([grid, type]);
 
         //select basic map
-        let grid = fullMaps[Math.floor(Phaser.Math.Between(0, fullMaps.length - 1))];
-        let type;
+        grid = fullMaps[Math.floor(Phaser.Math.Between(0, fullMaps.length - 1))];
         if (grid[2] != null) {
             type = grid[2];
         } else {
@@ -130,7 +132,7 @@ class PathCreate extends Phaser.Scene {
         this.path.push(null)
 
         //update path display with text
-        //display training grounds
+        this.room0.text = this.path[0][0][0] + " - " + this.path[0][1][0];
         this.room1.text = this.path[1][0][0] + " - " + this.path[1][1][0];
         this.room2.text = this.path[2][0][0] + " - " + this.path[2][1][0];
         this.room3.text = this.path[3][0][0] + " - " + this.path[3][1][0];
@@ -170,7 +172,7 @@ class PathCreate extends Phaser.Scene {
                 delay: 1300,
                 callback: () => {
                     currentLevel = 0;
-                    this.scene.start("levelScene");
+                    this.scene.start("tutorialLevel");
                 },
                 loop: false,
                 callbackScope: this

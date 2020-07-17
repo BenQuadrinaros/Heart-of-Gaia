@@ -16,7 +16,7 @@ let config = {
     width: 1200,
     height: 675,
 
-    scene: [Menu, CharacterCreate, PathCreate, Level]
+    scene: [Menu, CharacterCreate, PathCreate, Tutorial, Level]
 
 };
 
